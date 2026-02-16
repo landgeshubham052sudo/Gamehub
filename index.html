@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Your One-Stop Gaming Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Game<span>Hub</span></div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button><i class="fa fa-search"></i></button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li id="auth-link"><a href="#" onclick="toggleAuthModal('login'); return false;">Login</a></li>
+            <li id="user-profile" class="user-profile" style="display: none;">
+                <div class="user-dropdown">
+                    <span class="user-name" onclick="toggleUserMenu()"><i class="fa fa-user"></i> <span id="username-display">User</span> <i class="fa fa-chevron-down"></i></span>
+                    <div class="dropdown-content" id="user-dropdown-content">
+                        <a href="#" onclick="viewOrders(); return false;"><i class="fa fa-box"></i> My Orders</a>
+                        <a href="#" onclick="logout(); return false;"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="cart-box" onclick="toggleCart()">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to GameHub</h1>
+            <p>Your one-stop shop for all things gaming</p>
+            <button class="shop-now" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="container" id="products">
+        <h2 class="section-title">Featured Products</h2>
+        
+        <!-- Category Filters -->
+        <div class="filter-bar">
+            <button class="f-btn active" onclick="filterSelection('all')">All</button>
+            <button class="f-btn" onclick="filterSelection('games')">Games</button>
+            <button class="f-btn" onclick="filterSelection('accessories')">Accessories</button>
+            <button class="f-btn" onclick="filterSelection('consoles')">Consoles</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be rendered by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">About GameHub</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>GameHub is your ultimate destination for all things gaming. Since 2020, we've been providing gamers worldwide with the latest games, consoles, and accessories at competitive prices.</p>
+                    <p>Our mission is to provide an unparalleled gaming experience with our curated selection of products, fast shipping, and exceptional customer service.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h3>10K+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Products</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>50+</h3>
+                            <p>Brands</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600" alt="Gaming Setup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa fa-map-marker"></i>
+                        <span>Ghulewadi, Sangamner-422608</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa fa-phone"></i>
+                        <span>+91 7774034616</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa fa-envelope"></i>
+                        <span>support@gamehub.com</span>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="handleContact(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="shop-now">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest deals and gaming news delivered to your inbox!</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="shop-now">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GameHub</h3>
+                <p>Your one-stop shop for all things gaming.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GameHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleCart()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div class="cart-items" id="cart-items">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: ₹<span id="cart-total">0</span></h3>
+            </div>
+            <button class="shop-now" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quick-view-modal">
+        <div class="modal-content quick-view-content">
+            <span class="close-modal" onclick="closeQuickView()">&times;</span>
+            <div class="quick-view-details" id="quick-view-details">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal" id="wishlist-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleWishlist()">&times;</span>
+            <h2>My Wishlist</h2>
+            <div class="wishlist-items" id="wishlist-items">
+                <p class="empty-wishlist">Your wishlist is empty</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Button -->
+    <div class="wishlist-icon" onclick="toggleWishlist()">
+        <i class="fa fa-heart"></i>
+        <span id="wishlist-count">0</span>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Item added to cart!</div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content auth-modal">
+            <span class="close-modal" onclick="toggleAuthModal('login')">&times;</span>
+            <div class="auth-container">
+                <h2>Welcome Back!</h2>
+                <p class="auth-subtitle">Login to your GameHub account</p>
+                <form class="auth-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember-me">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link" onclick="toggleAuthModal('forgot'); return false;">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="shop-now auth-btn">Login</button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? 
+                    <a href="#" onclick="toggleAuthModal('register'); return false;">Register Now</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content auth-modal">
+            <span class="close-modal" onclick="toggleAuthModal('register')">&times;</span>
+            <div class="auth-container">
+                <h2>Create Account</h2>
+                <p class="auth-subtitle">Join GameHub and start shopping</p>
+                <form class="auth-form" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <input type="text" id="register-username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Confirm Password</label>
+                        <input type="password" id="register-confirm" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="shop-now auth-btn">Create Account</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? 
+                    <a href="#" onclick="toggleAuthModal('login'); return false;">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgot-modal">
+        <div class="modal-content auth-modal">
+            <span class="close-modal" onclick="toggleAuthModal('forgot')">&times;</span>
+            <div class="auth-container">
+                <h2>Reset Password</h2>
+                <p class="auth-subtitle">Enter your email to reset your password</p>
+                <form class="auth-form" onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label for="forgot-email">Email</label>
+                        <input type="email" id="forgot-email" placeholder="Enter your email" required>
+                    </div>
+                    <button type="submit" class="shop-now auth-btn">Send Reset Link</button>
+                </form>
+                <p class="auth-switch">
+                    Remember your password? 
+                    <a href="#" onclick="toggleAuthModal('login'); return false;">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content checkout-modal">
+            <span class="close-modal" onclick="toggleCheckout()">&times;</span>
+            <div class="checkout-container">
+                <h2>Checkout</h2>
+                
+                <!-- Checkout Steps -->
+                <div class="checkout-steps">
+                    <div class="step active" id="step-shipping">
+                        <span class="step-number">1</span>
+                        <span class="step-title">Shipping</span>
+                    </div>
+                    <div class="step" id="step-payment">
+                        <span class="step-number">2</span>
+                        <span class="step-title">Payment</span>
+                    </div>
+                    <div class="step" id="step-confirm">
+                        <span class="step-number">3</span>
+                        <span class="step-title">Confirm</span>
+                    </div>
+                </div>
+
+                <!-- Shipping Form -->
+                <div class="checkout-section" id="shipping-section">
+                    <h3>Shipping Information</h3>
+                    <form class="checkout-form" onsubmit="goToPayment(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shipping-name">Full Name</label>
+                                <input type="text" id="shipping-name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-phone">Phone Number</label>
+                                <input type="tel" id="shipping-phone" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shipping-address">Address</label>
+                            <input type="text" id="shipping-address" placeholder="Enter your address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shipping-city">City</label>
+                                <input type="text" id="shipping-city" placeholder="Enter city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-zip">Zip Code</label>
+                                <input type="text" id="shipping-zip" placeholder="Enter zip code" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shipping-state">State</label>
+                            <input type="text" id="shipping-state" placeholder="Enter state" required>
+                        </div>
+                        <button type="submit" class="shop-now">Continue to Payment</button>
+                    </form>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="checkout-section" id="payment-section" style="display: none;">
+                    <h3>Payment Information</h3>
+                    
+                    <!-- Payment Method Selection -->
+                    <div class="payment-methods">
+                        <div class="payment-method-card active" onclick="selectPaymentMethod('card')" data-method="card">
+                            <input type="radio" name="payment-method" value="card" checked>
+                            <i class="fa fa-credit-card"></i>
+                            <span>Credit/Debit Card</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                        <div class="payment-method-card" onclick="selectPaymentMethod('paypal')" data-method="paypal">
+                            <input type="radio" name="payment-method" value="paypal">
+                            <i class="fa fa-paypal"></i>
+                            <span>PayPal</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                        <div class="payment-method-card" onclick="selectPaymentMethod('upi')" data-method="upi">
+                            <input type="radio" name="payment-method" value="upi">
+                            <i class="fa fa-mobile"></i>
+                            <span>UPI</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                        <div class="payment-method-card" onclick="selectPaymentMethod('netbanking')" data-method="netbanking">
+                            <input type="radio" name="payment-method" value="netbanking">
+                            <i class="fa fa-university"></i>
+                            <span>Net Banking</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                        <div class="payment-method-card" onclick="selectPaymentMethod('wallet')" data-method="wallet">
+                            <input type="radio" name="payment-method" value="wallet">
+                            <i class="fa fa-wallet"></i>
+                            <span>Wallet</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                        <div class="payment-method-card" onclick="selectPaymentMethod('cod')" data-method="cod">
+                            <input type="radio" name="payment-method" value="cod">
+                            <i class="fa fa-money-bill-wave"></i>
+                            <span>Cash on Delivery</span>
+                            <i class="fa fa-check payment-check"></i>
+                        </div>
+                    </div>
+
+                    <!-- Credit/Debit Card Form -->
+                    <div id="card-form" class="payment-form-section">
+                        <form class="checkout-form" onsubmit="goToConfirm(event)">
+                            <div class="form-group">
+                                <label for="card-name">Name on Card</label>
+                                <input type="text" id="card-name" placeholder="Enter name on card">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="card-expiry">Expiry Date</label>
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-cvv">CVV</label>
+                                    <input type="text" id="card-cvv" placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+                            <div class="payment-security">
+                                <i class="fa fa-lock"></i>
+                                <span>Your payment information is secure</span>
+                            </div>
+                            <button type="submit" class="shop-now">Review Order</button>
+                            <button type="button" class="back-btn" onclick="goBackToShipping()">Back to Shipping</button>
+                        </form>
+                    </div>
+
+                    <!-- UPI Form -->
+                    <div id="upi-form" class="payment-form-section" style="display: none;">
+                        <form class="checkout-form" onsubmit="goToConfirm(event)">
+                            <div class="form-group">
+                                <label for="upi-id">UPI ID</label>
+                                <input type="text" id="upi-id" placeholder="yourname@upi">
+                            </div>
+                            <p class="payment-info">You will receive a payment request on your UPI app</p>
+                            <div class="payment-security">
+                                <i class="fa fa-lock"></i>
+                                <span>Your payment is secure with UPI</span>
+                            </div>
+                            <button type="submit" class="shop-now">Review Order</button>
+                            <button type="button" class="back-btn" onclick="goBackToShipping()">Back to Shipping</button>
+                        </form>
+                    </div>
+
+                    <!-- Net Banking Form -->
+                    <div id="netbanking-form" class="payment-form-section" style="display: none;">
+                        <form class="checkout-form" onsubmit="goToConfirm(event)">
+                            <div class="form-group">
+                                <label for="bank-select">Select Bank</label>
+                                <select id="bank-select">
+                                    <option value="">-- Select Your Bank --</option>
+                                    <option value="sbi">State Bank of India</option>
+                                    <option value="hdfc">HDFC Bank</option>
+                                    <option value="icici">ICICI Bank</option>
+                                    <option value="axis">Axis Bank</option>
+                                    <option value="pnb">Punjab National Bank</option>
+                                    <option value="bankofbaroda">Bank of Baroda</option>
+                                    <option value="canara">Canara Bank</option>
+                                    <option value="yesbank">Yes Bank</option>
+                                    <option value="kotak">Kotak Mahindra Bank</option>
+                                    <option value="idbi">IDBI Bank</option>
+                                </select>
+                            </div>
+                            <p class="payment-info">You will be redirected to your bank's secure page</p>
+                            <div class="payment-security">
+                                <i class="fa fa-lock"></i>
+                                <span>Your banking information is secure</span>
+                            </div>
+                            <button type="submit" class="shop-now">Review Order</button>
+                            <button type="button" class="back-btn" onclick="goBackToShipping()">Back to Shipping</button>
+                        </form>
+                    </div>
+
+                    <!-- Wallet Form -->
+                    <div id="wallet-form" class="payment-form-section" style="display: none;">
+                        <form class="checkout-form" onsubmit="goToConfirm(event)">
+                            <div class="form-group">
+                                <label for="wallet-select">Select Wallet</label>
+                                <select id="wallet-select">
+                                    <option value="">-- Select Your Wallet --</option>
+                                    <option value="paytm">Paytm</option>
+                                    <option value="amazonpay">Amazon Pay</option>
+                                    <option value="phonepe">PhonePe</option>
+                                    <option value="googlepay">Google Pay</option>
+                                    <option value="mobikwik">MobiKwik</option>
+                                    <option value="freecharge">FreeCharge</option>
+                                </select>
+                            </div>
+                            <p class="payment-info">You will be redirected to the wallet app</p>
+                            <div class="payment-security">
+                                <i class="fa fa-lock"></i>
+                                <span>Your wallet payment is secure</span>
+                            </div>
+                            <button type="submit" class="shop-now">Review Order</button>
+                            <button type="button" class="back-btn" onclick="goBackToShipping()">Back to Shipping</button>
+                        </form>
+                    </div>
+
+                    <!-- Cash on Delivery Form -->
+                    <div id="cod-form" class="payment-form-section" style="display: none;">
+                        <form class="checkout-form" onsubmit="goToConfirm(event)">
+                            <div class="cod-info">
+                                <i class="fa fa-info-circle"></i>
+                                <p>Pay with Cash when your order is delivered to your doorstep.</p>
+                            </div>
+                            <div class="payment-security">
+                                <i class="fa fa-shield-alt"></i>
+                                <span>Pay on delivery for added convenience</span>
+                            </div>
+                            <button type="submit" class="shop-now">Review Order</button>
+                            <button type="button" class="back-btn" onclick="goBackToShipping()">Back to Shipping</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Confirmation -->
+                <div class="checkout-section" id="confirm-section" style="display: none;">
+                    <h3>Order Summary</h3>
+                    <div class="order-summary" id="checkout-order-summary">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="order-total">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>₹<span id="checkout-subtotal">0</span></span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping:</span>
+                            <span>₹<span id="checkout-shipping">0</span></span>
+                        </div>
+                        <div class="total-row">
+                            <span>Tax:</span>
+                            <span>₹<span id="checkout-tax">0</span></span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total:</span>
+                            <span>₹<span id="checkout-total">0</span></span>
+                        </div>
+                    </div>
+                    <button class="shop-now" onclick="placeOrder()">Place Order</button>
+                    <button type="button" class="back-btn" onclick="goBackToPayment()">Back to Payment</button>
+                </div>
+
+                <!-- Order Success -->
+                <div class="checkout-section" id="success-section" style="display: none;">
+                    <div class="order-success">
+                        <i class="fa fa-check-circle"></i>
+                        <h3>Order Placed Successfully!</h3>
+                        <p>Thank you for your order. Your order ID is: <strong id="order-id">#GH0000</strong></p>
+                        <p>You will receive a confirmation email shortly.</p>
+                        <button class="shop-now" onclick="closeCheckoutAndReset()">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Orders Modal -->
+    <div class="modal" id="orders-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleOrdersModal()">&times;</span>
+            <h2>My Orders</h2>
+            <div class="orders-list" id="orders-list">
+                <p class="empty-orders">You haven't placed any orders yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration (must load first) -->
+    <script src="js/config.js"></script>
+    
+    <!-- Data and Core -->
+    <script src="js/data.js"></script>
+    
+    <!-- Features (order matters for dependencies) -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <!-- Main App Initialization -->
+    <script src="js/app.js"></script>
+</body>
+</html>
