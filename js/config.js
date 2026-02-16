@@ -1,9 +1,5 @@
-// Configuration settings
 const config = {
     apiUrl: 'https://api.example.com',
-    port: 3000,
-    env: 'development',
-    debug: true,
+    // Add other config settings
 };
-
-module.exports = config;
+export default config;
