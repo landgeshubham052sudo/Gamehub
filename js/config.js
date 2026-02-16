@@ -1,9 +1,9 @@
-// Basic Configuration Settings
+// Configuration settings
 const config = {
     apiUrl: 'https://api.example.com',
-    appTitle: 'Game Hub',
-    version: '1.0.0',
-    theme: 'light'
+    port: 3000,
+    env: 'development',
+    debug: true,
 };
 
-export default config;
+module.exports = config;
