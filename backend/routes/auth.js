@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const db = require('../config/sqlite');
+const db = require('../config/db');
 
 // Register new user
 router.post('/register', async (req, res) => {

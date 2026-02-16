@@ -4,8 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-// Initialize database (MySQL)
-const db = require('./config/db');
+// Initialize database (SQLite - fallback when MySQL is not available)
+const db = require('./config/sqlite');
 
 // Import routes
 const authRoutes = require('./routes/auth');
