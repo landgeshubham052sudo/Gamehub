@@ -51,7 +51,7 @@ function renderWishlistItems() {
                 <p>₹${product.price.toLocaleString()}</p>
             </div>
             <div class="wishlist-item-actions">
-                <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, ${product.id})">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('${product.name.replace(/'/g, "\'")}', ${product.price}, ${product.id})">Add to Cart</button>
                 <button class="remove-wishlist" onclick="toggleWishlistItem(${product.id})">Remove</button>
             </div>
         </div>

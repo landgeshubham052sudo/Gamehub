@@ -4,18 +4,21 @@
 let cart = [];
 
 // Add to Cart
-function addToCart(name, price, id) {
+function addToCart(name, price, id, buttonElement) {
     cart.push({id, name, price});
     updateCartCount();
     showToast('Item added to cart!');
     
-    // Update button temporarily
-    event.target.innerText = "Added!";
-    event.target.style.background = "#ffffff";
-    setTimeout(() => {
-        event.target.innerText = "Add to Cart";
-        event.target.style.background = "#00ff00";
-    }, 1000);
+    // Update button temporarily if provided
+    if (buttonElement && event && event.target) {
+        const btn = event.target;
+        btn.innerText = "Added!";
+        btn.style.background = "#ffffff";
+        setTimeout(() => {
+            btn.innerText = "Add to Cart";
+            btn.style.background = "#00ff00";
+        }, 1000);
+    }
 }
 
 // Update Cart Count
