@@ -15,7 +15,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 echo [1/3] Node.js found - OK
 
-REM Start backend server (uses SQLite - no database setup needed)
+REM Start backend server (uses MySQL with phpMyAdmin - see PHPMYADMIN_SETUP.md)
 echo [2/3] Starting backend server...
 
 REM Install dependencies if needed
@@ -27,7 +27,7 @@ if not exist "node_modules" (
     echo [3/3] Dependencies found - OK
 )
 
-REM Start the server (SQLite database is auto-created if missing)
+REM Start the server (MySQL database - make sure XAMPP MySQL is running)
 echo.
 echo ========================================
 echo Server will start on http://localhost:3000

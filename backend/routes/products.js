@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/sqlite');
+const db = require('../config/db');
 
 // Get all products
 router.get('/', (req, res) => {

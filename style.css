@@ -1,10 +1,10 @@
 :root {
-    --primary: #00ff00;
+    --primary: #8b5cf6;
     --dark-bg: #121212;
     --card-bg: #1e1e1e;
     --text: #ffffff;
-    --secondary: #00cc00;
-    --accent: #ff6b6b;
+    --secondary: #7c3aed;
+    --accent: #f59e0b;
 }
 
 * { margin:0; padding:0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -1109,3 +1109,4 @@ footer {
     color: #aaa;
     line-height: 1.5;
 }
+.add-btn::before {
